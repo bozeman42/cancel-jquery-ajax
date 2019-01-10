@@ -3,22 +3,24 @@ const output = document.querySelector('#response')
 
 let inputCall = null
 
-const callService = () => {
-  if (inputCall) {
-    inputCall.abort()
-  }
-  inputCall = $.ajax({
-    type: 'POST',
-    url: 'http://localhost:5000/inputCall',
-    data: {
-      data: input.value
-    },
-    success: function(response) {
-      console.log('success')
-      output.textContent = response.data
-      inputCall = null
+const serviceObj = {
+  inputCall: null,
+  callService: () => {
+    if (this.inputCall) {
+      this.inputCall.abort()
     }
-  })
+    this.inputCall = $.ajax({
+      type: 'POST',
+      url: 'http://localhost:5000/inputCall',
+      data: {
+        data: input.value
+      },
+      success: response => {
+        output.textContent = response.data
+        this.inputCall = null
+      }
+    })
+  }
 }
 
-input.addEventListener('input', callService)
+input.addEventListener('input', serviceObj.callService)
