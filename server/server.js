@@ -6,7 +6,7 @@ const PORT = 5000
 app.use(express.static('server/public'))
 app.use(express.urlencoded())
 app.use((req,res,next) => {
-  setTimeout(() => next(), 250)
+  setTimeout(() => next(), 1000)
 })
 
 app.post('/inputcall',(req,res) => {
